@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sanjit Coaching Center — Dewaitha</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#16203a;--mut:#5d6882;--line:#e3e7f1;--navy:#0b1d3a;--gold:#ffc107;--ok:#1b8a5a;--bad:#c9382f;--blue:#2447a8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1322;--card:#161e33;--ink:#edf0f8;--mut:#9fa9c2;--line:#27314e;--ok:#4cc38a;--bad:#ef6b61;--blue:#8aa8ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1322;--card:#161e33;--ink:#edf0f8;--mut:#9fa9c2;--line:#27314e;--ok:#4cc38a;--bad:#ef6b61;--blue:#8aa8ff;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,"Noto Sans Devanagari",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:10}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--navy);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px}
+.logo{width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:800}
+.top b{display:block;line-height:1.2}.top small{opacity:.8}
+main{max-width:720px;margin:auto;padding:14px 14px 90px}
+h2{font-size:20px;margin:22px 0 8px}h3{margin:0 0 6px;font-size:17px}
+[hidden]{display:none!important}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:11;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs button{flex:1;border:0;background:none;color:var(--mut);padding:8px 2px;font:12px inherit;cursor:pointer}
+.tabs button span{display:block;font-size:20px}
+.tabs button.on{color:var(--ink);font-weight:700;box-shadow:inset 0 3px var(--gold)}
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:20px}
+.hero h1{margin:0 0 8px;font-size:26px;line-height:1.2}.hero b{color:var(--gold)}
+.hero p{opacity:.9}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.btn{display:inline-block;border:2px solid var(--gold);background:var(--gold);color:#0b1d3a;font:700 15px inherit;padding:9px 16px;border-radius:8px;text-decoration:none;cursor:pointer}
+.btn.alt{background:transparent;border-color:currentColor;color:inherit}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px;margin:10px 0}
+.note{background:var(--card);border:1px dashed var(--gold);border-radius:10px;padding:10px 14px;margin:12px 0}
+.mut{color:var(--mut);font-size:14px}.good{color:var(--ok);font-weight:700}.bad{color:var(--bad);font-weight:700}
+label{display:block;font-weight:600;font-size:14px;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:16px inherit}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.tabs button:focus-visible,.opt:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);font-size:15px}th{color:var(--mut)}
+.scroll{overflow-x:auto}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:11px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:16px inherit;cursor:pointer}
+.opt.sel{border-color:var(--blue);font-weight:700}
+.chip{border:0;border-radius:16px;padding:2px 12px;font:700 13px inherit;color:#fff;cursor:pointer;background:var(--mut)}.chip.ok{background:var(--ok)}.chip.no{background:var(--bad)}
+.mini{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:2px 9px;font:14px inherit;text-decoration:none;cursor:pointer}
+.sub{display:flex;gap:6px;overflow-x:auto;margin:10px 0}.sub .mini.on{background:var(--gold);color:#0b1d3a;font-weight:700}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--gold)}
+.err{color:var(--bad);font-size:14px;min-height:18px;margin:4px 0}
+.big{font:800 46px/1 inherit}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">SC</div><div><b>Sanjit Coaching Center</b><small>Dewaitha, Dalmau · Class 1 se 9</small></div></div>
+<main id="app"></main>
+<nav class="tabs" id="tabs"></nav>
+<script>
+const K="scc_app_v1",PH="917080219503",TEL="7080219503";
+const $=s=>document.querySelector(s),v=id=>($("#"+id)||{}).value||"";
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const wl=(t,n)=>"https://wa.me/"+(n===undefined?PH:n)+"?text="+encodeURIComponent(t);
+const today=()=>new Date().toISOString().slice(0,10);
+const co=a=>(a?'<option value="all">Sabhi class</option>':"")+[1,2,3,4,5,6,7,8,9].map(c=>"<option>"+c+"</option>").join("");
+const seed=()=>({pin:"1234",live:"",students:[{id:1,n:"Aarav Singh",c:"6",p:"9000000001",paid:true,att:{}},{id:2,n:"Riya Verma",c:"3",p:"9000000002",paid:false,att:{}}],ann:[{t:"Sunday subah 9 baje Weekly Test hai. Time par aayein.",d:today()}],mat:[{ty:"Homework",c:"6",t:"Maths: Chapter 1 ke sawal 1 se 10",l:""}],tests:[{id:1,t:"Maths Practice",c:"all",m:3,q:[["12 × 8 = ?",["86","96","108","92"],1],["¾ ka decimal kya hai?",["0.34","0.7","0.75","1.34"],2],["UP ki rajdhani kaun si hai?",["Kanpur","Lucknow","Agra","Varanasi"],1]]}],res:[],doubts:[]});
+let D;try{D=JSON.parse(localStorage.getItem(K))||seed()}catch(e){D=seed()}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}};
+let tab="home",sub="students",me=null,admin=false,cls="",T=null,RS=null,tm;
+const pct=s=>{const a=Object.values(s.att);return a.length?Math.round(a.filter(x=>x).length/a.length*100)+"%":"—"};
+const best=()=>{const m={};D.res.forEach(r=>{const p=Math.round(r.s/r.m*100);if(!(r.n in m)||p>m[r.n])m[r.n]=p});return Object.entries(m).sort((a,b)=>b[1]-a[1])};
+const login=()=>me?`<div class="card"><h3>Namaste, ${esc(me.n)}</h3><p class="mut">Class ${me.c} · Attendance ${pct(me)} · Fees: <span class="${me.paid?"good":"bad"}">${me.paid?"Jama":"Baki"}</span></p><button class="btn alt" data-a="out">Logout</button></div>`:
+`<div class="card"><h3>Student Login</h3><label for="lm">Mobile number</label><input id="lm" inputmode="numeric" maxlength="10"><p class="err" id="le"></p><button class="btn" data-a="in">Login</button></div>`;
+const V={
+home(){const L=D.ann[0],b=best().slice(0,3);return `<div class="hero"><h1>Class 1 se 9 Tak<br><b>Best Coaching in Dewaitha</b></h1><p>CBSE | UP Board · All Subjects<br>📍 Dewaitha, Dalmau, Raebareli · 📞 ${TEL}</p><div class="row"><a class="btn" href="${wl("Admission Lena Hai")}" target="_blank" rel="noopener">Admission lo</a><a class="btn alt" href="tel:${TEL}">Call karo</a></div></div>`+
+(L?`<div class="note">📢 ${esc(L.t)}</div>`:"")+login()+
+`<h2>Hamare Courses</h2><div class="card"><h3>Class 1–5 · ₹700/month</h3><p class="mut">All Subjects — Base Strong, Handwriting, Maths expert.</p></div><div class="card"><h3>Class 6–8 · ₹1,000/month</h3><p class="mut">Maths, Science, English, SST — Weekly Test + PDF Notes.</p></div><div class="card"><h3>Class 9 · ₹1,300/month</h3><p class="mut">Board + Foundation — Daily DPP, Monthly Grand Test.</p></div>
+<h2>Time Table</h2><div class="card scroll"><table><tr><th>Class</th><th>Timing</th><th>Subjects</th></tr><tr><td>1–5</td><td>2:00–4:00 PM</td><td>All Subjects</td></tr><tr><td>6–8</td><td>4:00–6:00 PM</td><td>Maths / Science / English</td></tr><tr><td>9</td><td>6:00–8:00 PM</td><td>Maths, Science, SST</td></tr><tr><td>Sunday</td><td>9:00 AM</td><td>Weekly Test</td></tr></table></div>`+
+(b.length?`<h2>Test Leaderboard 🏆</h2><div class="card">`+b.map((x,i)=>`<p style="margin:4px 0">${["🥇","🥈","🥉"][i]} ${esc(x[0])} — ${x[1]}%</p>`).join("")+`</div>`:"")+
+`<h2>Free Demo Book karo</h2><div class="card"><label for="dn">Naam</label><input id="dn"><label for="dc">Class</label><select id="dc">${co()}</select><div class="row"><button class="btn" data-a="demo">WhatsApp pe demo book karo</button></div></div><p class="mut" style="text-align:center">Sanjit Coaching Center — Dewaitha, Dalmau, Raebareli - 229102<br>Owner: Sanjit Sir</p>`},
+study(){const c=cls||(me?me.c:"all"),it=D.mat.filter(m=>c==="all"||m.c==="all"||m.c===c),ic={Notes:"📄",Video:"▶️",Homework:"📝"};
+return `<h2>Padhai</h2><label for="sc">Class</label><select id="sc" data-a="cls" data-v="${c}">${co(1)}</select>`+
+(D.live?`<div class="card"><h3>🎥 Live Class</h3><a class="btn" href="${esc(D.live)}" target="_blank" rel="noopener">Join karo</a></div>`:`<div class="card"><h3>🎥 Live Class</h3><p class="mut">Live class ka link teacher yahan daalenge.</p></div>`)+
+(it.length?it.map(m=>`<div class="card"><p class="mut" style="margin:0">${ic[m.ty]||""} ${m.ty} · Class ${m.c==="all"?"Sabhi":m.c}</p><h3>${esc(m.t)}</h3>${/^https?:\/\//.test(m.l)?`<a class="btn" href="${esc(m.l)}" target="_blank" rel="noopener">Kholein</a>`:""}</div>`).join(""):`<p class="mut">Is class ke liye abhi kuch nahi hai.</p>`)},
+test(){if(T)return tq();const ts=D.tests.filter(t=>!me||t.c==="all"||t.c===me.c);
+return `<h2>Online Test</h2>`+(RS?`<div class="card"><div class="big">${RS.s}/${RS.m}</div><h3>${Math.round(RS.s/RS.m*100)}% — ${RS.t}</h3>`+RS.rv.map(r=>`<p><span class="${r[0]?"good":"bad"}">${r[0]?"✓":"✗"}</span> ${esc(r[1])} <span class="mut">Sahi: ${esc(r[2])}</span></p>`).join("")+`<button class="btn" data-a="tagain">Theek hai</button></div>`:"")+
+(me?"":`<label for="tn">Aapka naam</label><input id="tn">`)+(ts.length?ts.map(t=>`<div class="card"><h3>${esc(t.t)}</h3><p class="mut">${t.q.length} sawal · ${t.m} minute · Class ${t.c==="all"?"Sabhi":t.c}</p><button class="btn" data-a="st" data-i="${t.id}">Test shuru karo</button></div>`).join(""):`<p class="mut">Abhi koi test nahi hai.</p>`)},
+doubt(){return `<h2>Doubt Box</h2><div class="card"><label for="qn">Naam</label><input id="qn" value="${me?esc(me.n):""}"><label for="qc">Class</label><select id="qc" data-v="${me?me.c:"1"}">${co()}</select><label for="qt">Aapka doubt</label><textarea id="qt" rows="3"></textarea><div class="row"><button class="btn" data-a="dsend">Doubt bhejo</button></div></div>`+
+(D.doubts.length?D.doubts.map(d=>`<div class="card"><p class="mut" style="margin:0">${esc(d.n)} · Class ${d.c}</p><p style="margin:4px 0">${esc(d.q)}</p><p class="${d.r?"good":"mut"}" style="margin:0">${d.r?"Teacher: "+esc(d.r):"Jawab ka intezaar hai"}</p></div>`).reverse().join(""):`<p class="mut">Raat ko bhi doubt bhej sakte ho, teacher subah jawab denge.</p>`)},
+teacher(){if(!admin)return `<h2>Teacher Login</h2><div class="card"><label for="pin">PIN</label><input id="pin" type="password" inputmode="numeric"><p class="err" id="pe"></p><button class="btn" data-a="pin">Login</button><p class="mut">Demo PIN: 1234</p></div>`;
+const S=[["students","Students"],["att","Attendance"],["post","Post"],["mk","Test"],["dq","Doubts"],["rep","Report"]];
+return `<h2>Teacher Panel</h2><div class="sub">`+S.map(s=>`<button class="mini${sub===s[0]?" on":""}" data-a="sub" data-s="${s[0]}">${s[1]}</button>`).join("")+`<button class="mini" data-a="aout">Logout</button></div>`+TS[sub]()}};
+const TS={
+students(){const n=D.students.filter(s=>!s.paid).length;return `<div class="card"><h3>Student add karo</h3><label for="sn">Naam</label><input id="sn"><label for="sk">Class</label><select id="sk">${co()}</select><label for="sp">Mobile</label><input id="sp" inputmode="numeric" maxlength="10"><div class="row"><button class="btn" data-a="sadd">Add karo</button></div></div><p class="mut">${D.students.length} students · ${n} ki fees baki</p><div class="card scroll"><table><tr><th>Naam</th><th>Fees</th><th></th></tr>`+D.students.map((s,i)=>`<tr><td>${esc(s.n)}<br><span class="mut">Class ${s.c}</span></td><td><button class="chip ${s.paid?"ok":"no"}" data-a="spaid" data-i="${i}">${s.paid?"Jama":"Baki"}</button></td><td>${s.paid?"":`<a class="mini" target="_blank" rel="noopener" href="${wl("Namaste, "+s.n+" ki is mahine ki fees baki hai. Kripya jama karein. — Sanjit Coaching Center",s.p?"91"+s.p:"")}">Reminder</a> `}<button class="mini" data-a="sdel" data-i="${i}" aria-label="Hatao">✕</button></td></tr>`).join("")+`</table></div>`},
+att(){return `<p class="mut">Aaj ki attendance (${today()}). Tap karke Present / Absent badlein.</p><div class="card scroll"><table>`+D.students.map((s,i)=>{const a=s.att[today()];return `<tr><td>${esc(s.n)}<br><span class="mut">Class ${s.c} · ${pct(s)}</span></td><td><button class="chip ${a===1?"ok":a===0?"no":""}" data-a="att" data-i="${i}">${a===1?"Present":a===0?"Absent":"Mark karo"}</button></td></tr>`}).join("")+`</table></div>`},
+post(){return `<div class="card"><h3>Announcement</h3><input id="an" placeholder="Jaise: Kal chutti hai"><div class="row"><button class="btn" data-a="pann">Post karo</button></div></div><div class="card"><h3>Live class link</h3><input id="lv" value="${esc(D.live)}" placeholder="https://..."><div class="row"><button class="btn" data-a="plive">Save karo</button></div></div><div class="card"><h3>Notes / Video / Homework</h3><label for="mt">Type</label><select id="mt"><option>Notes</option><option>Video</option><option>Homework</option></select><label for="mc">Class</label><select id="mc">${co(1)}</select><label for="mn">Title</label><input id="mn"><label for="ml">Link (optional)</label><input id="ml" placeholder="https://..."><div class="row"><button class="btn" data-a="pmat">Add karo</button></div></div>`},
+mk(){return `<div class="card"><h3>Naya test</h3><label for="tt">Test ka naam</label><input id="tt"><label for="tk">Class</label><select id="tk">${co(1)}</select><label for="tm">Time (minute)</label><input id="tm" inputmode="numeric" value="10"><label for="tq">Har line mein ek sawal</label><textarea id="tq" rows="5" placeholder="Sawal | A | B | C | D | sahi option (1-4)"></textarea><p class="err" id="te"></p><div class="row"><button class="btn" data-a="tadd">Test banao</button></div></div>`+D.tests.map((t,i)=>`<div class="card"><b>${esc(t.t)}</b> <span class="mut">${t.q.length} sawal</span> <button class="mini" data-a="tdel" data-i="${i}" aria-label="Hatao">✕</button></div>`).join("")},
+dq(){const p=D.doubts.map((d,i)=>[d,i]).filter(x=>!x[0].r);return p.length?p.map(([d,i])=>`<div class="card"><p class="mut" style="margin:0">${esc(d.n)} · Class ${d.c}</p><p>${esc(d.q)}</p><input id="r${i}" placeholder="Jawab likho"><div class="row"><button class="btn" data-a="dr" data-i="${i}">Jawab bhejo</button></div></div>`).join(""):`<p class="mut">Sab doubts ke jawab ho chuke hain.</p>`},
+rep(){return `<div class="card">`+(D.students.length?D.students.map(s=>{const r=D.res.filter(x=>x.n.toLowerCase()===s.n.toLowerCase()),a=r.length?Math.round(r.reduce((t,x)=>t+x.s/x.m*100,0)/r.length):0;return `<p style="margin:8px 0 2px">${esc(s.n)} <span class="mut">· Test avg ${r.length?a+"%":"—"} · Attendance ${pct(s)}</span></p><div class="bar"><i style="width:${a}%"></i></div>`}).join(""):`<p class="mut">Pehle students add karein.</p>`)+`</div>`}};
+function tq(){const q=T.t.q[T.i];return `<div class="row" style="justify-content:space-between;margin:14px 0 0"><span class="mut">Sawal ${T.i+1} / ${T.t.q.length}</span><b id="tt2" style="color:var(--bad);font-size:20px"></b></div><div class="card"><h3>${esc(q[0])}</h3>`+q[1].map((o,i)=>`<button class="opt${T.a[T.i]===i?" sel":""}" data-a="o" data-i="${i}">${esc(o)}</button>`).join("")+`<div class="row"><button class="btn" data-a="nx">${T.i===T.t.q.length-1?"Submit":"Next"}</button></div></div>`}
+function tick(){const e=$("#tt2");if(e)e.textContent=Math.floor(T.left/60)+":"+String(T.left%60).padStart(2,"0")}
+function fin(){clearInterval(tm);let s=0;const rv=T.t.q.map((q,i)=>{const ok=T.a[i]===q[2];if(ok)s++;return [ok,q[0],q[1][q[2]]]});
+RS={s,m:T.t.q.length,rv,t:s/T.t.q.length>=.8?"Shabash!":s/T.t.q.length>=.5?"Achha prayas":"Mehnat jaari rakho"};D.res.push({n:T.n,tid:T.t.id,s,m:RS.m,d:today()});T=null;save();render()}
+function render(){const L=[["home","🏠","Home"],["study","📚","Padhai"],["test","📝","Test"],["doubt","💬","Doubt"],["teacher","🔐","Teacher"]];
+$("#tabs").innerHTML=L.map(l=>`<button data-a="tab" data-t="${l[0]}" class="${tab===l[0]?"on":""}"><span>${l[1]}</span>${l[2]}</button>`).join("");
+$("#app").innerHTML=V[tab]();document.querySelectorAll("[data-v]").forEach(e=>e.value=e.dataset.v);if(T)tick()}
+function act(a,d,b){const i=+d.i;
+if(a==="tab"){tab=d.t}
+else if(a==="in"){const s=D.students.find(x=>x.p&&x.p===v("lm").trim());if(!s){$("#le").textContent="Ye mobile number registered nahi hai. Coaching se sampark karein.";return}me=s}
+else if(a==="out")me=null;
+else if(a==="demo"){open(wl("Free demo book karna hai.\nNaam: "+v("dn")+"\nClass: "+v("dc")),"_blank");return}
+else if(a==="cls")cls=b.value;
+else if(a==="st"){const t=D.tests.find(x=>x.id===i),n=me?me.n:v("tn").trim();if(!n){$("#tn").focus();return}T={t,n,i:0,a:[],left:t.m*60};clearInterval(tm);tm=setInterval(()=>{T.left--;tick();if(T.left<=0)fin()},1000)}
+else if(a==="o")T.a[T.i]=i;
+else if(a==="nx"){if(T.i<T.t.q.length-1)T.i++;else{fin();return}}
+else if(a==="tagain")RS=null;
+else if(a==="dsend"){if(!v("qt").trim()||!v("qn").trim())return;D.doubts.push({n:v("qn").trim(),c:v("qc"),q:v("qt").trim(),r:""})}
+else if(a==="pin"){if(v("pin")===D.pin)admin=true;else{$("#pe").textContent="PIN galat hai.";return}}
+else if(a==="aout")admin=false;
+else if(a==="sub")sub=d.s;
+else if(a==="sadd"){if(!v("sn").trim())return;D.students.push({id:Date.now(),n:v("sn").trim(),c:v("sk"),p:v("sp").replace(/\D/g,"").slice(-10),paid:false,att:{}})}
+else if(a==="sdel")D.students.splice(i,1);
+else if(a==="spaid")D.students[i].paid=!D.students[i].paid;
+else if(a==="att"){const s=D.students[i];s.att[today()]=s.att[today()]===1?0:1}
+else if(a==="pann"){if(!v("an").trim())return;D.ann.unshift({t:v("an").trim(),d:today()})}
+else if(a==="plive")D.live=v("lv").trim();
+else if(a==="pmat"){if(!v("mn").trim())return;D.mat.unshift({ty:v("mt"),c:v("mc"),t:v("mn").trim(),l:v("ml").trim()})}
+else if(a==="tadd"){const q=v("tq").split("\n").map(l=>l.split("|").map(x=>x.trim())).filter(p=>p.length===6&&p[5]>=1&&p[5]<=4).map(p=>[p[0],p.slice(1,5),+p[5]-1]);
+if(!v("tt").trim()||!q.length){$("#te").textContent="Naam likhein aur har line is format mein: Sawal | A | B | C | D | 1-4";return}D.tests.push({id:Date.now(),t:v("tt").trim(),c:v("tk"),m:+v("tm")||10,q})}
+else if(a==="tdel")D.tests.splice(i,1);
+else if(a==="dr"){if(!v("r"+i).trim())return;D.doubts[i].r=v("r"+i).trim()}
+save();render()}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b&&b.tagName!=="SELECT")act(b.dataset.a,b.dataset,b)});
+document.addEventListener("change",e=>{const b=e.target.closest("select[data-a]");if(b)act(b.dataset.a,b.dataset,b)});
+render();
+</script>
+</body>
+</html>
